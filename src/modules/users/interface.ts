@@ -28,6 +28,7 @@ export interface IUserEntity {
     public_path?: string
   }
   private_account?: boolean
+  fcm_token?: string
   created_at?: Date
   updated_at?: Date
 }

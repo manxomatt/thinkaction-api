@@ -18,6 +18,7 @@ const makeRouter = async ({ dbConnection }: IBaseAppInput) => {
     { method: 'post', path: '/refresh', middlewares: [refreshMiddleware], controller: controller.refreshController },
     { method: 'post', path: '/signout', controller: controller.signoutController },
     { method: 'post', path: '/update-last-seen', middlewares: [authMiddleware], controller: controller.updateLastSeenController },
+    { method: 'post', path: '/update-fcm-token', middlewares: [authMiddleware], controller: controller.updateFcmTokenController },
     { method: 'post', path: '/verify-email', controller: controller.verifyEmailController },
     { method: 'post', path: '/verify-token', controller: controller.verifyTokenController },
     { method: 'post', path: '/request-password', controller: controller.requestPasswordController },

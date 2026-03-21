@@ -46,11 +46,15 @@ export const schema: ISchema[] = [
         },
         email_verification_code: {
           bsonType: 'string',
-          description: 'The verification code used to confirm the user’s email.',
+          description: 'The verification code used to confirm the user email.',
         },
         is_email_verified: {
           bsonType: 'bool',
-          description: 'Indicates whether the user’s email has been verified.',
+          description: 'Indicates whether the user email has been verified.',
+        },
+        fcm_token: {
+          bsonType: 'string',
+          description: 'Firebase Cloud Messaging token for push notifications.',
         },
         created_at: {
           bsonType: 'date',

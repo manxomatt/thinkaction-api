@@ -10,3 +10,6 @@ coverage
 
 # tsconfig buildinfo
 tsconfig.tsbuildinfo
+
+# kilocode memory bank
+.kilocode/

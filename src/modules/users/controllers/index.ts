@@ -12,6 +12,7 @@ export { signoutController } from './signout.controller';
 export { signupController } from './signup.controller';
 export { updateController } from './update.controller';
 export { updateEmailController } from './update-email.controller';
+export { updateFcmTokenController } from './update-fcm-token.controller';
 export { updateLastSeenController } from './update-last-seen.controller';
 export { updatePasswordController } from './update-password.controller';
 export { verifyEmailController } from './verify-email.controller';

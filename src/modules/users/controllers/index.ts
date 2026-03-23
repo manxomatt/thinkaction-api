@@ -10,6 +10,7 @@ export { sendEmailVerificationController } from './send-email-verification.contr
 export { signinController } from './signin.controller';
 export { signoutController } from './signout.controller';
 export { signupController } from './signup.controller';
+export { testPushNotificationController } from './test-push-notification.controller';
 export { updateController } from './update.controller';
 export { updateEmailController } from './update-email.controller';
 export { updateFcmTokenController } from './update-fcm-token.controller';

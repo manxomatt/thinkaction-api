@@ -13,3 +13,7 @@ tsconfig.tsbuildinfo
 
 # kilocode memory bank
 .kilocode/
+
+# Firebase service account credentials
+*-firebase-adminsdk-*.json
+firebase-service-account.json

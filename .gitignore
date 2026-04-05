@@ -10,3 +10,9 @@ coverage
 
 # tsconfig buildinfo
 tsconfig.tsbuildinfo
+
+# kilocode
+.kilocode
+
+# firebase admin sdk
+*-firebase-adminsdk-*.json

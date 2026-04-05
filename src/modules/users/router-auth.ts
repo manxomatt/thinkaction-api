@@ -24,6 +24,7 @@ const makeRouter = async ({ dbConnection }: IBaseAppInput) => {
     { method: 'post', path: '/reset-password', controller: controller.resetPasswordController },
     { method: 'post', path: '/is-email-exists', controller: controller.isEmailExistsController },
     { method: 'post', path: '/send-email-verification', controller: controller.sendEmailVerificationController },
+    { method: 'post', path: '/register-fcm-token', middlewares: [authMiddleware], controller: controller.registerFcmTokenController },
   ];
 
   routes.forEach(({ method, path, controller, middlewares }) => {

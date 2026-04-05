@@ -52,6 +52,36 @@ export const schema: ISchema[] = [
           bsonType: 'bool',
           description: 'Indicates whether the user’s email has been verified.',
         },
+        fcm_tokens: {
+          bsonType: 'array',
+          description: 'Array of FCM tokens for push notifications.',
+          items: {
+            bsonType: 'object',
+            properties: {
+              token: {
+                bsonType: 'string',
+                description: 'The FCM device token.',
+              },
+              device_id: {
+                bsonType: 'string',
+                description: 'Unique identifier for the device.',
+              },
+              device_type: {
+                bsonType: 'string',
+                enum: ['ios', 'android', 'web'],
+                description: 'The type of device (ios, android, or web).',
+              },
+              created_at: {
+                bsonType: 'date',
+                description: 'Timestamp when the token was registered.',
+              },
+              updated_at: {
+                bsonType: 'date',
+                description: 'Timestamp when the token was last updated.',
+              },
+            },
+          },
+        },
         created_at: {
           bsonType: 'date',
           description: 'Timestamp indicating when the user account was created.',

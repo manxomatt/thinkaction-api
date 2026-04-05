@@ -1,4 +1,5 @@
 import { createApp } from './app';
+import { initializeFirebase } from './config/firebase';
 import serverConfig from './config/server';
 import { dbConnection } from './database/database';
 import { createServer } from './server';
@@ -9,6 +10,11 @@ import { createServer } from './server';
  * call dbConnection.close() (which is asynchronous and returns a Promise)..
  */
 await dbConnection.open();
+
+/**
+ * Initialize Firebase Admin SDK for FCM push notifications
+ */
+initializeFirebase();
 
 /**
  * Create HTTP Server for API

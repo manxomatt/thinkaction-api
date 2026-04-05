@@ -5,6 +5,7 @@ import { CreateRepository as NotificationCreateRepository } from '@/modules/noti
 import { NotificationService } from '@/modules/notifications/services/notification.service';
 import { StorageService } from '@/modules/storages/utils/storage-service';
 import type { IUserEntity } from '@/modules/users/interface';
+import { RetrieveFcmTokensRepository } from '@/modules/users/repositories/retrieve-fcm-tokens.repository';
 
 import { DeleteRepository } from '../repositories/delete.repository';
 import { RetrieveRepository } from '../repositories/retrieve.repository';
@@ -21,8 +22,10 @@ export const deleteController: IController = async (controllerInput: IController
     const deleteRepository = new DeleteRepository(controllerInput.dbConnection, { session });
     const retrieveRepository = new RetrieveRepository(controllerInput.dbConnection, { session });
     const notificationCreateRepository = new NotificationCreateRepository(controllerInput.dbConnection, { session });
+    const retrieveFcmTokensRepository = new RetrieveFcmTokensRepository(controllerInput.dbConnection, { session });
     const notificationService = new NotificationService({
       createRepository: notificationCreateRepository,
+      retrieveFcmTokensRepository,
     });
 
     // Initialize use case with dependencies

@@ -1,3 +1,11 @@
+export interface IFcmToken {
+  token: string
+  device_id?: string
+  device_type?: 'ios' | 'android' | 'web'
+  created_at?: Date
+  updated_at?: Date
+}
+
 export interface IUserEntity {
   _id?: string
   name?: string
@@ -28,6 +36,7 @@ export interface IUserEntity {
     public_path?: string
   }
   private_account?: boolean
+  fcm_tokens?: IFcmToken[]
   created_at?: Date
   updated_at?: Date
 }

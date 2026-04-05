@@ -2,6 +2,7 @@ export { isEmailExistsController } from './is-email-exists.controller';
 export { isUsernameExistsController } from './is-username-exists.controller';
 export { meController } from './me.controller';
 export { refreshController } from './refresh.controller';
+export { registerFcmTokenController } from './register-fcm-token.controller';
 export { requestPasswordController } from './request-password.controller';
 export { resetPasswordController } from './reset-password.controller';
 export { retrieveController } from './retrieve.controller';

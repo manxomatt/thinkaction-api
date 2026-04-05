@@ -4,6 +4,7 @@ import { AblyService } from '@/modules/ably/services/ably.service';
 import { CreateRepository as NotificationCreateRepository } from '@/modules/notifications/repositories/create.repository';
 import { NotificationService } from '@/modules/notifications/services/notification.service';
 import type { IUserEntity } from '@/modules/users/interface';
+import { RetrieveFcmTokensRepository } from '@/modules/users/repositories/retrieve-fcm-tokens.repository';
 import { schemaValidation } from '@/utils/validation';
 
 import { CreateRepository } from '../repositories/create.repository';
@@ -23,8 +24,10 @@ export const createController: IController = async (controllerInput: IController
     // Initialize repositories and utilities
     const createRepository = new CreateRepository(controllerInput.dbConnection, { session });
     const notificationCreateRepository = new NotificationCreateRepository(controllerInput.dbConnection, { session });
+    const retrieveFcmTokensRepository = new RetrieveFcmTokensRepository(controllerInput.dbConnection, { session });
     const notificationService = new NotificationService({
       createRepository: notificationCreateRepository,
+      retrieveFcmTokensRepository,
     });
 
     // Initialize use case with dependencies

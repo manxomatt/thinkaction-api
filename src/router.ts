@@ -6,6 +6,7 @@ import ablyAuthRouter from './modules/ably/router';
 import aiRouter from './modules/ai/router';
 import cheerRouter from './modules/cheers/router';
 import commentRouter from './modules/comments/router';
+import fcmRouter from './modules/fcm/router';
 import goalRouter from './modules/goals/router';
 import healthRouter from './modules/health/router';
 import notificationRouter from './modules/notifications/router';
@@ -40,6 +41,7 @@ export default async function (baseRouterInput: IBaseAppInput) {
   app.use('/v1/supports', await supportRouter(baseRouterInput));
   app.use('/v1/notifications', await notificationRouter(baseRouterInput));
   app.use('/v1/ai', await aiRouter(baseRouterInput));
+  app.use('/v1/fcm', await fcmRouter(baseRouterInput));
 
   /**
    * Rendered email templates

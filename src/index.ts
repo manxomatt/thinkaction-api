@@ -1,6 +1,7 @@
 import { createApp } from './app';
 import { initializeFirebase } from './config/firebase';
 import serverConfig from './config/server';
+import { startCronScheduler } from './cron';
 import { dbConnection } from './database/database';
 import { createServer } from './server';
 
@@ -15,6 +16,12 @@ await dbConnection.open();
  * Initialize Firebase Admin SDK for FCM push notifications
  */
 initializeFirebase();
+
+/**
+ * Start cron scheduler for background jobs
+ * - Goal reminder: Sends FCM notifications for goals with H-1 deadline
+ */
+startCronScheduler(dbConnection);
 
 /**
  * Create HTTP Server for API

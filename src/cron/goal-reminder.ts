@@ -12,38 +12,44 @@ interface IUserWithFcmTokens {
 /**
  * Goal Reminder Cron Job
  *
- * This job checks for goals with target date (time field) that is H-1 (1 day before deadline)
- * and sends FCM push notifications to remind users.
+ * This job runs every hour and checks for goals with target date (time field)
+ * that falls within the same hour tomorrow.
+ *
+ * Example: If the cron runs at 9:00 AM today, it will send notifications for
+ * goals with deadline between 9:00 AM - 9:59 AM tomorrow.
  */
 export async function runGoalReminderJob(dbConnection: IDatabase): Promise<void> {
   console.log('[Goal Reminder] Starting goal reminder job...');
 
   const now = new Date();
+  const currentHour = now.getHours();
 
-  // Calculate tomorrow's date range (H-1 means target is tomorrow)
-  const tomorrowStart = new Date(now);
-  tomorrowStart.setDate(tomorrowStart.getDate() + 1);
-  tomorrowStart.setHours(0, 0, 0, 0);
+  // Calculate tomorrow's hour range
+  // If cron runs at 9:00 AM today, check for goals with deadline 9:00 AM - 9:59 AM tomorrow
+  const tomorrowHourStart = new Date(now);
+  tomorrowHourStart.setDate(tomorrowHourStart.getDate() + 1);
+  tomorrowHourStart.setHours(currentHour, 0, 0, 0);
 
-  const tomorrowEnd = new Date(tomorrowStart);
-  tomorrowEnd.setHours(23, 59, 59, 999);
+  const tomorrowHourEnd = new Date(tomorrowHourStart);
+  tomorrowHourEnd.setMinutes(59, 59, 999);
 
-  console.log(`[Goal Reminder] Checking goals with deadline between ${tomorrowStart.toISOString()} and ${tomorrowEnd.toISOString()}`);
+  console.log(`[Goal Reminder] Current hour: ${currentHour}:00`);
+  console.log(`[Goal Reminder] Checking goals with deadline between ${tomorrowHourStart.toISOString()} and ${tomorrowHourEnd.toISOString()}`);
 
   try {
-    // Find goals with target date (time field) that is tomorrow and status is in-progress
+    // Find goals with target date (time field) that falls within the same hour tomorrow and status is in-progress
     const goalsResponse = await dbConnection.collection('goals').retrieveAll({
       filter: {
         time: {
-          $gte: tomorrowStart,
-          $lte: tomorrowEnd,
+          $gte: tomorrowHourStart,
+          $lte: tomorrowHourEnd,
         },
         status: 'in-progress',
       },
     });
 
     const goals = goalsResponse.data as IGoalEntity[];
-    console.log(`[Goal Reminder] Found ${goals.length} goals with deadline tomorrow`);
+    console.log(`[Goal Reminder] Found ${goals.length} goals with deadline tomorrow at ${currentHour}:00-${currentHour}:59`);
 
     if (goals.length === 0) {
       console.log('[Goal Reminder] No goals to remind. Job completed.');

@@ -34,7 +34,7 @@ export const notificationTemplate: INotificationTemplate[] = [
   {
     type: 'cheers',
     title: 'New Cheer',
-    notification: '[username] is cheers on your goal',
+    notification: '[username] is cheering on your goal',
   },
   {
     type: 'comment',
@@ -44,7 +44,7 @@ export const notificationTemplate: INotificationTemplate[] = [
   {
     type: 'mention',
     title: 'You were mentioned',
-    notification: '[username] is mention you on comment',
+    notification: '[username] is mentioning you in a comment',
   },
   {
     type: 'comment-replied',
